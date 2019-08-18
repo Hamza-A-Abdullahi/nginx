@@ -22,3 +22,7 @@ template '/etc/nginx/sites-available/proxy.conf' do
   variables proxy_port: node['nginx']['proxy_port']
   notifies :restart, 'service[nginx]'
 end
+
+link '/etc/nginx/sites-enabled/proxy.conf' do
+  to '/etc/nginx/sites-available/proxy.conf'
+end
