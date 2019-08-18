@@ -46,4 +46,9 @@ describe 'nginx::default' do
     expect(chef_run).to create_template('/etc/nginx/sites-available/proxy.conf').with_variables(proxy_port: 3000)
   end
 
+  # delete default config file in site-enable so that we can replace our proxy.config 
+  it 'should delete the symbolic from default config in site-enable' do
+      expect(chef_run).to delete_link('/etc/nginx/sites-enabled/default')
+    end
+
 end

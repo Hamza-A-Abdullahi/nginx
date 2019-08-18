@@ -23,6 +23,12 @@ template '/etc/nginx/sites-available/proxy.conf' do
   notifies :restart, 'service[nginx]'
 end
 
+# A proxy.conf is in sites available. create a symbolic link so that site enable
 link '/etc/nginx/sites-enabled/proxy.conf' do
   to '/etc/nginx/sites-available/proxy.conf'
+end
+
+link '/etc/nginx/sites-enabled/default' do
+  action :delete
+  notifies :restart, 'service[nginx]'
 end
