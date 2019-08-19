@@ -14,13 +14,17 @@ package "nginx" do
 end
 
 service "nginx" do
-  action [:enable,:start]
+  action [:enable, :start]
 end
+
+# execute "start nginx" do
+#   command "systemctl start nginx"
+# end
 
 template '/etc/nginx/sites-available/proxy.conf' do
   source 'proxy.conf.erb'
   variables proxy_port: node['nginx']['proxy_port']
-  notifies :restart, 'service[nginx]'
+
 end
 
 # A proxy.conf is in sites available. create a symbolic link so that site enable
@@ -30,5 +34,5 @@ end
 
 link '/etc/nginx/sites-enabled/default' do
   action :delete
-  notifies :restart, 'service[nginx]'
+  notifies :restart, "service[nginx]"
 end

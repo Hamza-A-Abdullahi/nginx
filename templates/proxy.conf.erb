@@ -48,7 +48,7 @@ server {
 
 
     location / {
-        proxy_pass http://localhost:<%= @prox_port %>;
+        proxy_pass http://localhost:<%= @proxy_port %>;
         # First attempt to serve request as file, then
         # as directory, then fall back to displaying a 404.
         try_files $uri $uri/ =404;
