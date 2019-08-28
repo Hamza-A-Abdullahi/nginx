@@ -7,11 +7,13 @@
 require 'spec_helper'
 
 describe 'nginx::default' do
-  context 'When all attributes are default, on Ubuntu 18.04' do
+  context 'When all attributes are default, on Ubuntu' do
     # for a complete list of available platforms and versions see:
     # https://github.com/chefspec/fauxhai/blob/master/PLATFORMS.md
 
-    platform 'ubuntu', '18.04'
+    platform 'ubuntu'
+
+    
 
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
@@ -46,7 +48,7 @@ describe 'nginx::default' do
     expect(chef_run).to create_template('/etc/nginx/sites-available/proxy.conf').with_variables(proxy_port: 3000)
   end
 
-  # delete default config file in site-enable so that we can replace our proxy.config 
+  # delete default config file in site-enable so that we can replace our proxy.config
   it 'should delete the symbolic from default config in site-enable' do
       expect(chef_run).to delete_link('/etc/nginx/sites-enabled/default')
     end

@@ -30,4 +30,3 @@ suites:
       inspec_tests:
         - test/integration/default
     attributes:
-      
